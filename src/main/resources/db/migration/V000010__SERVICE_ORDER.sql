@@ -1,0 +1,23 @@
+create table SERVICE_ORDER (
+    SERVICE_ORDER_ID bigint not null,
+    SERVICE_TYPE_ID	int	not null,
+    COM_ORDER_ID bigint,
+    MSS_EWO_ID	bigint not null,
+    CREATED_AT	timestamp,
+    ACTIVITY_TYPE VARCHAR(1) not null,
+    STATUS_ID int not null,
+    ORDER_NUM VARCHAR(255),
+    ORGANIZATION_ID	bigint,
+    CID	VARCHAR(50),
+    SELECTOR VARCHAR(32) not null,
+    REQUIRED_DESIGN_DATE DATE,
+    RESERVE_DATETO DATE,
+    REQUIRED_ORG_DATE DATE,
+    REQUIRED_DISABLE_DATE DATE,
+    DSC	VARCHAR(2000),
+    EXECUTOR_NAME VARCHAR(1000),
+    BASE_SERVICE_ORDER_ID bigint,
+    ACTUAL_EXECUTION_DATE DATE,
+    PROJECT_ID int,
+    PROGRAM_ID int
+);

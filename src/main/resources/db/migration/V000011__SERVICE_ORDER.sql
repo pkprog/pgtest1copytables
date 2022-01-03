@@ -1,0 +1,2 @@
+alter table SERVICE_ORDER add PRIMARY KEY (SERVICE_ORDER_ID);
+
