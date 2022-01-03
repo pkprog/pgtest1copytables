@@ -1,4 +1,4 @@
-package ru.pk.testpg1.model.modeldsc;
+package ru.pk.testpg1.model.modelsrc;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "NRIV", name = "SERVICE_ORDER")
-public class ServiceOrderPg {
+public class ServiceOrderOra {
 
     @Id
     @Column(name = "SERVICE_ORDER_ID", nullable = false)
