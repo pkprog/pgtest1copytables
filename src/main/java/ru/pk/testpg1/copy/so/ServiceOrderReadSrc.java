@@ -1,5 +1,6 @@
 package ru.pk.testpg1.copy.so;
 
+import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,20 @@ public class ServiceOrderReadSrc {
 
     @Transactional(value = "primaryTm", readOnly = true)
     public Page<ServiceOrderOra> readPage(PageRequest request) {
-        return serviceOrderOraRepository.getPage(request);
+        Page<ServiceOrderOra> res = serviceOrderOraRepository.getPage(request);
+
+        for (ServiceOrderOra so: res.getContent()) {
+            Hibernate.initialize(so);
+        }
+
+        return res;
     }
 
+
+    private final ServiceOrderOraRepository serviceOrderOraRepository;
 
     public ServiceOrderReadSrc(ServiceOrderOraRepository serviceOrderOraRepository) {
         this.serviceOrderOraRepository = serviceOrderOraRepository;
     }
 
-    private final ServiceOrderOraRepository serviceOrderOraRepository;
 }

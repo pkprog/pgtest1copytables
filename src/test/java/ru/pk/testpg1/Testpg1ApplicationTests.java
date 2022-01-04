@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pk.testpg1.copy.so.ServiceOrderReadSrc;
+import ru.pk.testpg1.copy.so.ServiceOrderWriteDst;
 import ru.pk.testpg1.model.modelsrc.ServiceOrderOra;
 import ru.pk.testpg1.repository.reposdsc.ServiceOrderPgRepository;
 import ru.pk.testpg1.repository.repossrc.ServiceOrderOraRepository;
@@ -22,6 +23,8 @@ class Testpg1ApplicationTests {
     private ServiceOrderPgRepository serviceOrderPgRepository;
     @Autowired
     private ServiceOrderReadSrc serviceOrderReadSrc;
+    @Autowired
+    private ServiceOrderWriteDst serviceOrderWriteDst;
 
     @Test
     @Transactional(value = "primaryTm")
@@ -39,10 +42,19 @@ class Testpg1ApplicationTests {
 
     @Test
     void test3_copy() {
-        PageRequest request = PageRequest.of(0, 500);
-
-        Page<ServiceOrderOra> page = serviceOrderReadSrc.readPage(request);
-        System.out.println("Result count (pg)=" + page.getContent().size());
+        int i = 0;
+        do {
+            PageRequest request = PageRequest.of(i, 500);
+            Page<ServiceOrderOra> page = serviceOrderReadSrc.readPage(request);
+            if (page.getContent().size() == 0) {
+                break;
+            } else {
+                System.out.println("Result count (ora)=" + page.getContent().size());
+                int saved = serviceOrderWriteDst.writeAll(page.getContent()).size();
+                System.out.println("Saved (pg)=" + saved);
+            }
+            i++;
+        } while (true);
     }
 
 }
