@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
+//Destination
 @EnableJpaRepositories(
         basePackages = "ru.pk.testpg1.repository.reposdsc",
         entityManagerFactoryRef = "secondaryEm",
